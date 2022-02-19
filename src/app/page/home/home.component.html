@@ -1,0 +1,19 @@
+<div *ngIf="initDataInfo.loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div [hidden]="initDataInfo.loading">
+  <div>
+    <input [(ngModel)]="searchReq.pathKeyword" />
+    <button mat-raised-button (click)="search()">Search</button>
+  </div>
+
+  <swagger-ui #swaggerUi></swagger-ui>
+
+  <mat-paginator
+    [length]="totalItem"
+    [pageSize]="searchReq.pagination.limitItem"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="onPage($event)"
+    aria-label="Select page"
+  ></mat-paginator>
+</div>
