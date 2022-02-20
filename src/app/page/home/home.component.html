@@ -1,19 +1,59 @@
-<div *ngIf="initDataInfo.loading">
-  <mat-spinner></mat-spinner>
-</div>
-<div [hidden]="initDataInfo.loading">
-  <div>
-    <input [(ngModel)]="searchReq.pathKeyword" />
-    <button mat-raised-button (click)="search()">Search</button>
+<div class="h-full flex flex-col">
+  <div class="flex justify-end p-2 border-b border-gray-300">
+    <div class="relative">
+      <div class="absolute top-4 left-3">
+        <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+      </div>
+      <input
+        type="text"
+        class="h-12 w-96 pl-4 pr-20 border border-gray-300 rounded-md z-0 focus:shadow focus:outline-non"
+        placeholder="Search anything..."
+        [(ngModel)]="searchReq.pathKeyword"
+      />
+      <div class="absolute top-2 right-2">
+        <button
+          class="h-8 w-20 text-white rounded-md bg-purple-500 hover:bg-purple-600"
+          (click)="search()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
   </div>
+  <div class="flex-1 overflow-y-auto">
+    <div *ngIf="initDataInfo.loading">
+      <div class="flex justify-center items-center h-full">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+    <div [hidden]="initDataInfo.loading">
+      <!-- <div class="search-option-area">
+        <mat-form-field class="input-area">
+          <mat-label>Clearable input</mat-label>
+          <input matInput type="text" [(ngModel)]="searchReq.pathKeyword" />
+          <button
+            *ngIf="searchReq.pathKeyword"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="searchReq.pathKeyword = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button (click)="search()">Search</button>
+      </div> -->
 
-  <swagger-ui #swaggerUi></swagger-ui>
-
-  <mat-paginator
-    [length]="totalItem"
-    [pageSize]="searchReq.pagination.limitItem"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    (page)="onPage($event)"
-    aria-label="Select page"
-  ></mat-paginator>
+      <swagger-ui #swaggerUi></swagger-ui>
+    </div>
+  </div>
+  <div class="border-t border-gray-300">
+    <mat-paginator
+      [length]="totalItem"
+      [pageSize]="searchReq.pagination.limitItem"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPage($event)"
+      aria-label="Select page"
+    ></mat-paginator>
+  </div>
 </div>
